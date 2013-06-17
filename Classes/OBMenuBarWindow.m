@@ -35,7 +35,7 @@ NSString * const OBMenuBarWindowDidAttachToMenuBar = @"OBMenuBarWindowDidAttachT
 NSString * const OBMenuBarWindowDidDetachFromMenuBar = @"OBMenuBarWindowDidDetachFromMenuBar";
 
 // You can alter these constants to change the appearance of the window
-const CGFloat OBMenuBarWindowTitleBarHeight = 42.0;
+const CGFloat OBMenuBarWindowTitleBarHeight = 38.0;
 const CGFloat OBMenuBarWindowArrowHeight = 10.0;
 const CGFloat OBMenuBarWindowArrowWidth = 20.0;
 
@@ -83,6 +83,7 @@ const CGFloat OBMenuBarWindowArrowWidth = 20.0;
     {
         snapDistance = 30.0;
         hideWindowControlsWhenAttached = YES;
+        _isDetachable = NO;
         [self initialSetup];
     }
     return self;
@@ -571,7 +572,7 @@ const CGFloat OBMenuBarWindowArrowWidth = 20.0;
         NSRect statusItemFrame = [[statusItemView window] frame];
         NSPoint statusItemPoint = NSMakePoint(NSMidX(statusItemFrame), NSMinY(statusItemFrame));
         double distance = sqrt(pow(arrowPoint.x - statusItemPoint.x, 2) + pow(arrowPoint.y - statusItemPoint.y, 2));
-        if (distance <= self.snapDistance)
+        if (!self.isDetachable || distance <= self.snapDistance)
         {
             [self setFrameOrigin:[self originForAttachedState]];
             self.attachedToMenuBar = YES;

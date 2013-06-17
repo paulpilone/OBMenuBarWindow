@@ -111,6 +111,9 @@ extern const CGFloat OBMenuBarWindowArrowWidth;
  30.0 pixels). */
 @property (assign) CGFloat snapDistance;
 
+/** Whether window can be detached from the menu bar or not (default is YES) */
+@property (nonatomic, assign) BOOL isDetachable;
+
 /** The icon to show in the menu bar. The image should have a maximum height of
  22 pixels (or 44 pixels for retina displays). */
 @property (nonatomic, strong) NSImage *menuBarIcon;
